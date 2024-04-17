@@ -8,17 +8,24 @@ import { AuthService } from '../auth.service';
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.css'
 })
+
+
+
 export class BrowseComponent {
 
   auth = inject(AuthService);
-
+  name = JSON.parse(sessionStorage.getItem("loggedInUser")!).name;
+  userPicture = JSON.parse(sessionStorage.getItem("loggedInUser")!).picture;
+  email = JSON.parse(sessionStorage.getItem("loggedInUser")!).email;
+  
   signOut(){
+
     /**
      * As we are storing data in sessin storage 
      * so whenever we signout we need to clear that from session storage.
      * we are getting the key name loggedInUser fron Application -> Session Storage (If we inspact we can see that)
      */
-    sessionStorage.removeItem("loggedInUser")
+    sessionStorage.removeItem("loggedInUser");
 
     this.auth.signOut();
   }
